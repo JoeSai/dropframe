@@ -4,25 +4,48 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>掉帧 · 观众在哪一秒走的</title>
-<meta name="description" content="把抖音的留存曲线和视频画面对在一起，一眼看到观众在哪一秒、哪一帧走掉。文件只在你的浏览器里处理。">
+<meta name="description" content="把抖音的留存曲线和视频画面对在一起，一眼看到观众在哪一秒、哪一帧走掉，以及可能的原因。文件只在你的浏览器里处理。">
 <link rel="stylesheet" href="src/style.css">
 </head>
 <body>
-<header class="top">
-  <h1>掉帧</h1>
-  <p>观众在哪一秒走的，对着画面看。</p>
+<header class="bar">
+  <span class="mark">DROPFRAME</span>
+  <a href="https://github.com/JoeSai/dropframe" target="_blank" rel="noopener">GitHub</a>
 </header>
 
+<section class="hero" id="hero">
+  <div class="hero-text">
+    <h1 class="logo" aria-label="掉帧"><span>掉</span><span class="drop-char" data-c="帧">帧</span></h1>
+    <p class="lede">观众在哪一秒走的，<br>对着画面看。</p>
+    <p class="sub">把抖音导出的留存数据和成片一起拖进来。每一秒一格画面，比同类掉得快的那几秒，用红笔圈出来，再告诉你可能是哪里出了问题。</p>
+  </div>
+  <div class="hero-film" aria-hidden="true">
+    <div class="reel">
+      <i></i><i></i><i class="fall"><svg viewBox="0 0 120 80"><path d="M10,42 C6,16 50,4 82,9 C110,14 119,32 112,50 C104,68 60,74 32,66 C12,60 4,46 14,28"/></svg></i><i></i>
+    </div>
+  </div>
+</section>
+
 <main>
-  <section id="drop" class="drop">
+  <section id="drop" class="loader">
     <input id="pick" type="file" accept="video/*,.xlsx" multiple hidden>
     <div class="slots">
-      <div class="slot" id="slot-video"><b>成片视频</b><span>mp4 / mov</span></div>
-      <div class="slot" id="slot-data"><b>内容吸引力数据</b><span>抖音创作者中心里单条作品导出的 .xlsx</span></div>
+      <div class="slot" id="slot-video"><em>01</em><b>成片视频</b><span>mp4 / mov</span></div>
+      <div class="slot" id="slot-data"><em>02</em><b>内容吸引力数据</b><span>.xlsx</span></div>
     </div>
-    <p class="hint">把两个文件一起拖进来，或者 <button id="pick-btn" type="button">选择文件</button>。文件只在你的浏览器里处理，不会上传。</p>
+    <div class="actions">
+      <button id="pick-btn" class="btn" type="button">选择两个文件</button>
+      <button id="demo-btn" class="btn solid" type="button">用示例试试</button>
+      <span class="or">或者直接拖进这个框</span>
+    </div>
     <p id="error" class="error" hidden></p>
   </section>
+
+  <ol class="how">
+    <li><b>导出数据</b>电脑上打开抖音创作者中心，点开一条作品 → 流量分析 → 内容吸引力 → 导出</li>
+    <li><b>拖进成片</b>和这条作品同一个视频文件，跟导出的表格一起拖进来</li>
+    <li><b>看红圈</b>被圈出来的那几秒，就是观众比同类走得多的地方</li>
+  </ol>
 
   <section id="report" hidden>
     <div id="metrics" class="metrics"></div>
@@ -34,22 +57,22 @@
         <div id="readout" class="readout"></div>
       </div>
       <div class="worst">
-        <h2>最该看的几秒</h2>
-        <p class="sub">这一秒里走掉的观众，比同类作品多。点一下从这里播放。</p>
+        <h2>被圈出来的几秒</h2>
+        <p class="hint">这一秒走掉的观众比同类多。点一下，从这里播放。</p>
         <ol id="worst"></ol>
       </div>
     </div>
 
-    <div class="chart-wrap">
-      <div class="legend"><span class="k you"></span>你的作品 <span class="k peer"></span>同类作品 <span class="k gap"></span>比同类掉得快</div>
+    <div class="sheet">
+      <div class="legend"><span class="k you"></span>你的作品<span class="k peer"></span>同类作品<span class="k gap"></span>比同类掉得快，越深越多</div>
       <div id="chart" class="chart"></div>
       <p id="progress" class="progress"></p>
     </div>
-    <p class="again"><button id="reset" type="button">换一条视频</button></p>
+    <p class="again"><button id="reset" class="btn" type="button">换一条视频</button></p>
   </section>
 </main>
 
-<footer>开源项目 · 数据和视频都留在你的电脑上</footer>
+<footer>开源项目 · MIT · 视频和数据只在你的浏览器里处理，不会上传</footer>
 <script type="module" src="src/app.js"></script>
 </body>
 </html>
