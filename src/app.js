@@ -1,6 +1,6 @@
-import {readWorkbook} from './xlsx.js';
-import {parseExport, intervals, worstSeconds} from './analysis.js';
-import {audioLevels, frameStats, sampler, sampleTimes, reasons} from './diagnose.js';
+import {readWorkbook} from './xlsx.js?v=3';
+import {parseExport, intervals, worstSeconds} from './analysis.js?v=3';
+import {audioLevels, frameStats, sampler, sampleTimes, reasons} from './diagnose.js?v=3';
 
 const $ = id => document.getElementById(id);
 const files = {video: null, data: null};
