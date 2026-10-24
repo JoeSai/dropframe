@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>掉帧 · 观众在哪一秒走的</title>
+<meta name="description" content="把抖音的留存曲线和视频画面对在一起，一眼看到观众在哪一秒、哪一帧走掉。文件只在你的浏览器里处理。">
+<link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+<header class="top">
+  <h1>掉帧</h1>
+  <p>观众在哪一秒走的，对着画面看。</p>
+</header>
+
+<main>
+  <section id="drop" class="drop">
+    <input id="pick" type="file" accept="video/*,.xlsx" multiple hidden>
+    <div class="slots">
+      <div class="slot" id="slot-video"><b>成片视频</b><span>mp4 / mov</span></div>
+      <div class="slot" id="slot-data"><b>内容吸引力数据</b><span>抖音创作者中心里单条作品导出的 .xlsx</span></div>
+    </div>
+    <p class="hint">把两个文件一起拖进来，或者 <button id="pick-btn" type="button">选择文件</button>。文件只在你的浏览器里处理，不会上传。</p>
+    <p id="error" class="error" hidden></p>
+  </section>
+
+  <section id="report" hidden>
+    <div id="metrics" class="metrics"></div>
+    <p id="warn" class="warn" hidden></p>
+
+    <div class="stage">
+      <div class="player">
+        <video id="video" controls playsinline muted></video>
+        <div id="readout" class="readout"></div>
+      </div>
+      <div class="worst">
+        <h2>最该看的几秒</h2>
+        <p class="sub">这一秒里走掉的观众，比同类作品多。点一下从这里播放。</p>
+        <ol id="worst"></ol>
+      </div>
+    </div>
+
+    <div class="chart-wrap">
+      <div class="legend"><span class="k you"></span>你的作品 <span class="k peer"></span>同类作品 <span class="k gap"></span>比同类掉得快</div>
+      <div id="chart" class="chart"></div>
+      <p id="progress" class="progress"></p>
+    </div>
+    <p class="again"><button id="reset" type="button">换一条视频</button></p>
+  </section>
+</main>
+
+<footer>开源项目 · 数据和视频都留在你的电脑上</footer>
+<script type="module" src="src/app.js"></script>
+</body>
+</html>
